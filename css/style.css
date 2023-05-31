@@ -60,4 +60,15 @@ main {
 
 }
 
+.square.bomb-finded {
+    background-color: rgba(255, 0, 0, 0.548);
 
+}
+
+
+#message {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    margin: 15px 0;
+}

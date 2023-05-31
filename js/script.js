@@ -36,6 +36,7 @@ function fillArrayBombs(array_bombs, max){
 
 function createNewGame (){
     const grid = document.getElementById('grid');
+    const div_message = document.getElementById('message');
     const arrayBombs = [];
 
     //RECUPERO IL LIVELLO DI DIFFICOLTA'
@@ -44,6 +45,7 @@ function createNewGame (){
 
     //rIGENERATORE GRIGLIA
     grid.innerHTML = '';
+    div_message.innerText = '';
 
 
     let cellsNumber;
@@ -73,14 +75,21 @@ function createNewGame (){
 
   console.log(arrayBombs);
 
+    
 
     //INVOCO FUNZIONE createCell PER CREARE LE SINGOLE CASELLE DI GIOCO
-    createCells(cellsNumber);
+    createCells(cellsNumber, arrayBombs);
 
 }
 
 //FUNZIONE CREA CASELLE GRIGLIA
-function createCells (cells){
+function createCells (cells, arrayBombs){
+    let gameOver = false;
+
+
+    //NUMERO DI CASELLE SENZA BOMBE
+    let clickForWin = 0;
+
 
   
 
@@ -98,8 +107,33 @@ function createCells (cells){
     square.innerText = i + 1;
 
     square.addEventListener('click', function(){
-        this.classList.add('clicked');
-        console.log(this.innerText);
+
+        //ESERCIZIO BASE
+       // this.classList.add('clicked');
+       // console.log(this.innerText);
+
+       if(gameOver === false){
+        if(!arrayBombs.includes(parseInt(this.innerText))){
+            this.classList.add('clicked');
+            clickForWin++;
+            console.log(clickForWin);
+            
+    
+           }
+           else{
+                this.classList.add('bomb-finded');
+                gameOver = true;
+                document.getElementById('message').innerText = `Score: ${clickForWin} `
+                
+    
+    
+           }
+
+
+       }
+       
+
+       
 
 
     })
